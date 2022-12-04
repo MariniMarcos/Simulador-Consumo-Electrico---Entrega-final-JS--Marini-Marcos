@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tercera entrega 24-11 - Marini Marcos</title>
+</head>
+<body>
+    <div data-aos="fade-up"
+     data-aos-anchor-placement="center-center" data-aos-duration="3000">
+     <div class="login-card" id="logIn">
+        <h2>Login</h2>
+        <h3>Ingresa tus datos</h3>
+        <form class="login-form">
+          <input
+            spellcheck="false"
+            class="control"
+            id="user"
+            type="text"
+            placeholder="Usuario"
+            required
+            />
+          <div class="password">
+            <input
+              spellcheck="false"
+              class="control"
+              id="password"
+              type="password"
+              placeholder="Contraseña"
+              required
+              />
+            <button
+              class="toggle"
+              type="button"
+              onclick="togglePassword(this)"
+            ></button>
+          </div>
+          <button class="control" type="button" onclick="ingresarUsuario()">INGRESAR</button>
+        </form>
+      </div>
+    </div>
+    <div class="header" id="simulador" style="display:none;">
+        <div class="btnModoNoche">
+            <input type="radio" name="interruptor" id="prendido">
+            <input type="radio" name="interruptor" id="apagado" checked>
+            <div class="interruptor-cuerpo fas fa-moon">
+                <div class="interruptor-tecla">
+                            <label for="prendido" title="Desactivado" onclick="ModoOscuro()">___</label>
+                            <label for="apagado" title="Activado" onclick="ModoClaro()">___</label>
+                </div>		
+            </div>
+        </div>  
+        <div class="inner-header flex" id="capa">
+            <h1 id="titulo"> Bienvenidos al simulador de consumo electrico</h1>
+        </div>
+        <div id="contenedor">
+            <div id="caja1">
+                <h2 id="temperatura-valor"></h2>
+                <br>
+                <h2 id="temperatura-descripcion"></h2>
+            </div>
+            <div id="caja2">
+                <h2 id="ubicacion"></h2>
+                <img id="icono-animado" src="" alt="" height="80" width="80">
+            </div>
+            <div id="caja3">
+                <h2>Veloc. del Viento</h2>
+                <br>
+                <h2 id="viento-velocidad"></h2>
+            </div>
+        </div>
+        <section class="electrodomesticos">
+            <h1 class="electrodomesticos_seleccion" id="instruction">Seleccioná los electrodomésticos que utilizás, indicando cantidad y horas de uso diario.</h1>
+            <div class="electrodomesticos_seleccion">
+                <details>
+                    <summary>Televisión</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadTelevision" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Televisiones</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasTelevision" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+
+                    </div>
+                </details>
+                <details>
+                    <summary>Heladera</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadHeladera" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Heladeras </option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasHeladera" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+                <details>
+                    <summary>Computadora</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadComputadora" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Computadoras </option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasComputadora" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+                <details>
+                    <summary>Microondas</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadMicroondas" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Microondas </option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasMicroondas" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+                <details>
+                    <summary>Lavarropas</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadLavarropas" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Lavarropas </option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasLavarropas" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+                <details>
+                    <summary>Aire Acondicionado</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadAireAcondicionado" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Aires acondicionados</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasAireAcondicionado" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+                <details>
+                    <summary>Anafe</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadAnafe" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Anafes </option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasAnafe" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+                <details>
+                    <summary>Lamparas bajo consumo</summary>
+                    <div class="form-floating">
+                        <select class="form-select" id="cantidadLamparaBajoConsumo" aria-label="Floating label select example">
+                            <option selected value="0">Cantidad de Lamparas</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <select class="form-select" id="horasLamparaBajoConsumo" aria-label="Floating label select example">
+                            <option selected value="0">Horas de uso</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="1">7</option>
+                            <option value="2">8</option>
+                            <option value="3">9</option>
+                            <option value="4">10</option>
+                            <option value="5">11</option>
+                            <option value="6">12</option>
+                            <option value="1">13</option>
+                            <option value="2">14</option>
+                            <option value="3">15</option>
+                            <option value="4">16</option>
+                            <option value="5">17</option>
+                            <option value="6">18</option>
+                            <option value="1">19</option>
+                            <option value="2">20</option>
+                            <option value="3">21</option>
+                            <option value="4">22</option>
+                            <option value="5">23</option>
+                            <option value="6">24</option>
+                        </select>
+                    </div>
+                </details>
+            </div>
+            <div class="boton_calculo">
+            <button class="btn btn-primary" type="submit" >Calculá tu consumo</button>
+            </div>
+        </section>
+        <!--Waves Container-->
+        <div class="historico_div">
+            <div id="historico"></div>
+            <div class="historico2"><canvas id="myChart" width="200" height="200"></canvas></div>
+        </div>
+    <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        </g>
+        </svg>
+    </div>
+        <!--Waves end-->
+        
+    </div>
+        <!--Header ends-->
+        
+        <!--Content starts-->
+        <div class="content flex">
+        </div>
+        <!--Content ends-->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="js/db.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/api.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script> AOS.init();</script>
+</body>
+</html>
